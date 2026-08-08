@@ -1,0 +1,26 @@
+<html>
+<script>
+    let timeout
+    function debouncePopulateDiv(){
+    clearTimeout(timeout);
+     timeout = setTimeout(()=>{
+            populateDiv2()
+        },100);
+
+    }
+
+     async   function populateDiv2(){
+        const A= document.getElementById("inA").value;
+        const B= document.getElementById("inB").value;
+        const Ans= document.getElementById("finalsum");
+       let ans = parseInt(A)+parseInt(B);
+        document.getElementById("finalSum").innerHTML=ans;
+        
+        }
+</script>
+    <body>
+        <input oninput="debouncePopulateDiv()" id = "inA" type = "text" placeholder = "first number"></input><br>
+        <input oninput="debouncePopulateDiv()" id = "inB" type = "text" placeholder = "Second number"></input><br>
+        <div id = "finalSum">hi there</div>
+    </body>
+</html>

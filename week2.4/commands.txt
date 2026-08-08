@@ -1,0 +1,119 @@
+pwd 
+present working directory
+
+ls 
+display list of files and directories in the current directory
+
+ls $filename
+to see files and directories in the given filename
+
+ls -l
+to se in detailed format permision owner ..
+
+ls -r 
+to see directories and file along with their subdir
+
+ls -la
+to see hiddenfile
+
+to see in opposite order in which they are modified 
+ls -lr 
+
+by size
+ls -s
+
+recursively give me output of all the directory in recursive and with json
+ls -lR | grep.json
+
+TIP
+ls -lR folder/subfolder
+
+
+use wildcard - give all stuff matching with Zoo in name
+ls Zoo*
+
+to list previous directory 
+ls ..
+
+change directory
+cd
+cd ..
+cd path
+cd ../../.. 
+
+touch
+to create new file 
+touch filename
+
+concatenate
+to view content
+cat filename
+
+to write a new file in that file
+cat > filename  
+then enter your text
+ctrl+d
+to save
+
+to append more detail in existing
+cat >> filename
+
+to combine commands
+command1 && command2
+
+
+to create script directory under frontend directory
+mkdir -p frontend/scripts
+mkdir -p frontend/css
+mkdir -p frontend/img
+
+to rename filename
+mv oldfilename newname
+
+
+to copy
+cp frompath topath
+
+to remove 
+rm filename
+
+to change file permission ugo user group other rwx readwriteexecuteable
+chmod ugo -rwx filename
+chmod 664 1234
+
+to see top file and last content
+head -numberofcont filename
+tail -numberofcont filename
+
+wordcount
+wc newfile.txt
+
+to find instances of word
+grep "word" filename
+
+to get only count
+grep -c "word" filename
+
+to get the line where the word matches
+grep -h "word" filename
+
+grep -hi "word" filename
+
+grep -hir "word" filename
+
+grep -hin "word" filename
+
+grep -hinw "word" filename
+
+grep -o "word" filename
+
+grep -w "word" filename
+
+how to make script and all basics to make scripts
+
+
+how to install node in window and linux and mac
+nvm install node
+
+puri picture ho tum teaser to ni
+itni hot ho tum khi geyser to ni
