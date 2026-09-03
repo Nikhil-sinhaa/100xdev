@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "exports": {
+    "./config": "./src/config.ts"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev:tsc": "tsc -b && node dist/index.js",
+    "dev": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js && node dist/index.js",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1",
+    "@repo/common": "*"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "esbuild": "0.28.2"
+  }
+
+}

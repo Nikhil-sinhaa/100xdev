@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IIIT Dharwad - Student Registration Form</title>
+</head>
+<body>
+
+    <center>
+        <h1>Indian Institute of Information Technology Dharwad</h1>
+        <h3>Student Registration Form</h3>
+        <hr width="60%">
+    </center>
+
+    <form>
+
+        <label><b>Student Name:</b></label><br>
+        <input type="text" name="name" placeholder="name" required>
+        <br><br>
+
+        <label><b>Roll Number:</b></label><br>
+        <input type="text" name="roll" placeholder="24BCS086" required>
+        <br><br>
+
+        <label><b>Email ID:</b></label><br>
+        <input type="email" name="email" placeholder="college gmail" required>
+        <br><br>
+
+        <label><b>Mobile Number:</b></label><br>
+        <input type="tel" name="mobile" maxlength="10" required>
+        <br><br>
+
+        <label><b>Date of Birth:</b></label><br>
+        <input type="date" name="dob">
+        <br><br>
+
+        <label><b>Gender:</b></label><br>
+        <input type="radio" name="gender"> Male
+        <input type="radio" name="gender"> Female
+        <input type="radio" name="gender"> Other
+        <br><br>
+
+        <label><b>Branch:</b></label><br>
+        <select name="branch">
+            <option>Select Branch</option>
+            <option>Computer Science & Engineering </option>
+            <option>Electronics & Communication Engineering </option>
+            <option>Data Science & Artificial Intelligence </option>
+        </select>
+        <br><br>
+
+        <label><b>Year of Study:</b></label><br>
+        <select name="year">
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+        </select>
+        <br><br>
+
+  
+        <label><b>Address:</b></label><br>
+        <textarea rows="4" cols="40" placeholder="Enter your permanent address"></textarea>
+        <br><br>
+
+        <label><b>Parent/Guardian Name:</b></label><br>
+        <input type="text" name="parent">
+        <br><br>
+
+        <label><b>Parent Mobile Number:</b></label><br>
+        <input type="tel" name="parentmobile" maxlength="10">
+        <br><br>
+
+        <input type="checkbox" required>
+        I declare that all the information provided above is true to the best of my knowledge.
+        <br><br>
+
+        <input type="submit" value="Register">
+        
+
+    </form>
+
+</body>
+</html>

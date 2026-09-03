@@ -1,0 +1,26 @@
+{
+  "name": "@nikhil2211/zod-schema",
+  "version": "1.0.2",
+  "description": "Shared Zod validation schemas",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "test": "echo \"Error: no test specified && exit 1"
+  },
+  "keywords": [
+    "zod",
+    "validation",
+    "schema"
+  ],
+  "author": "nikhil2211",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@nikhil2211/zod-schema": "^1.0.0",
+    "zod": "^4.4.3"
+  },
+  "files": [
+    "dist"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "@repo/typescript-config/base",
+  "compilerOptions": {
+    "outDir": "dist",
+    "strictNullChecks": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
+model User{
+  id Int @id@default(autoincrement())
+  email String @unique
+  name String?
+}

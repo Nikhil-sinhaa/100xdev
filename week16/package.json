@@ -1,0 +1,10 @@
+{
+  "name": "week16",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix my-turborepo run dev",
+    "build": "npm --prefix my-turborepo run build",
+    "lint": "npm --prefix my-turborepo run lint",
+    "check-types": "npm --prefix my-turborepo run check-types"
+  }
+}
