@@ -1,87 +1,286 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Profile Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Task Manager</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        #taskInput {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn.active {
+            font-weight: bold;
+            border: 2px solid black;
+        }
+
+        #taskList {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .task-text {
+            flex: 1;
+        }
+
+        .task-item.done .task-text {
+            text-decoration: line-through;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #status {
+            min-height: 20px;
+            margin-bottom: 10px;
+        }
+
+        #stats {
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
-
-    <h1>Hello Everyone</h1>
-    <div>
-    
-
-    <div style = display:flex;>
-        <img style="height: 100px; width: 90px; display:flex" src="1.png" alt="Prof">
-    <h2>Nikhil Sinha</h2>
-    
+    <div class="container">
+        <h1>Smart Task Manager</h1>
+        <form id="taskForm">
+            <input id="taskInput" type="text" placeholder="Enter a task">
+            <button type="submit">Add Task</button>
+        </form>
+        <p id="status"></p>
+        <div class="filters">
+            <button type="button" class="filter-btn active" data-mode="all">All</button>
+            <button type="button" class="filter-btn" data-mode="active">Active</button>
+            <button type="button" class="filter-btn" data-mode="done">Done</button>
+        </div>
+        <p id="stats"></p>
+        <ul id="taskList"></ul>
     </div>
-    <p><b>Profession:</b> Software Developer</p>
-    </div>
 
-    
+    <script>
+        // 1. DOM SELECTION
+        const taskForm = document.querySelector("#taskForm");
+        const taskInput = document.querySelector("#taskInput");
+        const taskList = document.querySelector("#taskList");
+        const status = document.querySelector("#status");
+        const stats = document.querySelector("#stats");
+        const filterButtons = document.querySelectorAll(".filter-btn");
 
-    <p>
-        <b>Bio</b>
-        I am passionate about web development, artificial intelligence,
-        and competitive programming. I enjoy learning new technologies
-        and building useful projects.
-    </p>
+        // 2. APPLICATION STATE
+        const tasks = [];
+        let nextId = 1;
+        let currentFilter = "all";
 
-    <h3>Personal Information</h3>
+        // 3. CREATE TASK
+        function createTask(text) {
+            return {
+                id: nextId++,
+                text: text.trim(),
+                done: false
+            };
+        }
 
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>Name</th>
-            <td>Nikhil Sinha</td>
-        </tr>
-        <tr>
-            <th>Age</th>
-            <td>21</td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td>nikhilsinha11042005@gmail.com</td>
-        </tr>
-        <tr>
-            <th>Phone</th>
-            <td>+91 9334100814</td>
-        </tr>
-        <tr>
-            <th>Location</th>
-            <td>India</td>
-        </tr>
-    </table>
+        // 4. CHECK DUPLICATE
+        function isDuplicate(text) {
+            return tasks.some((task) => {
+                return task.text.toLowerCase() === text.toLowerCase();
+            });
+        }
 
-    <h3>Skills</h3>
-    <ul>
-        <li>HTML</li>
-        <li>C++</li>
-        <li>JavaScript</li>
-        <li>Python</li>
-        <li>SQL</li>
-    </ul>
+        // 5. ADD TASK
+        function addTask(rawText) {
+            const text = rawText.trim();
+            if (!text) { showStatus("Please enter a task."); return false; }
+            if (isDuplicate(text)) { showStatus("This task already exists."); return false; }
+            const newTask = createTask(text);
+            tasks.push(newTask);
+            renderTasks();
+            showStatus("Task added successfully.");
+            return true;
+        }
 
-    <h3>Education</h3>
-    <p>B.Tech in Computer Science and Engineering</p>
+        // 6. TOGGLE TASK
+        function toggleTask(taskId) {
+            const task = tasks.find((item) => { return item.id === taskId; });
+            if (!task) { return; }
+            task.done = !task.done;
+            renderTasks();
+        }
 
-    <h3>Hobbies</h3>
-    <ol>
-        <li>Competitive Programming</li>
-        <li>Watching Tech Videos</li>
-        <li>Gym</li>
-        <li>Reading</li>
-    </ol>
+        // 7. DELETE TASK
+        function deleteTask(taskId) {
+            const index = tasks.findIndex((item) => { return item.id === taskId; });
+            if (index === -1) { return; }
+            tasks.splice(index, 1);
+            renderTasks();
+            showStatus("Task deleted.");
+        }
 
-    <h3>Social Links</h3>
-    <p>
-        <a >GitHub</a>
-        <br>
-        <a >LinkedIn</a>
-        <br>
-        <a >Portfolio</a>
-    </p>
+        // 8. GET VISIBLE TASKS
+        function getVisibleTasks() {
+            if (currentFilter === "active") { return tasks.filter((task) => { return !task.done; }); }
+            if (currentFilter === "done") { return tasks.filter((task) => { return task.done; }); }
+            return tasks;
+        }
 
-    <button>Edit Profile</button>
-    <button>Contact</button>
+        // 9. SHOW STATUS
+        function showStatus(message) { status.textContent = message; }
 
+        // 10. UPDATE STATISTICS
+        function updateStats() {
+            const total = tasks.length;
+            const done = tasks.filter((task) => task.done).length;
+            const pending = total - done;
+            stats.textContent = `Total: ${total} | Done: ${done} | Pending: ${pending}`;
+        }
+
+        // 11. CREATE ONE TASK ROW
+        function createTaskRow(task) {
+            const row = document.createElement("li");
+            row.className = "task-item";
+            row.classList.toggle("done", task.done);
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = task.done;
+
+            const label = document.createElement("span");
+            label.className = "task-text";
+            label.textContent = task.text;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.textContent = "Delete";
+
+            // CHECKBOX EVENT
+            checkbox.addEventListener("change", (event) => {
+                console.log("target:", event.target);
+                toggleTask(task.id);
+            });
+
+            // DELETE EVENT
+            deleteButton.addEventListener("click", (event) => {
+                console.log("target:", event.target);
+                console.log("currentTarget:", event.currentTarget);
+                deleteTask(task.id);
+            });
+
+            row.append(checkbox, label, deleteButton);
+            return row;
+        }
+
+        // 12. RENDER TASKS
+        function renderTasks() {
+            taskList.innerHTML = "";
+            const visibleTasks = getVisibleTasks();
+            if (visibleTasks.length === 0) {
+                const empty = document.createElement("li");
+                empty.className = "empty";
+                empty.textContent = tasks.length === 0 ? "No tasks yet." : `No ${currentFilter} tasks.`;
+                taskList.appendChild(empty);
+            }
+            for (const task of visibleTasks) {
+                const row = createTaskRow(task);
+                taskList.appendChild(row);
+            }
+            updateStats();
+            updateFilterButtons();
+            console.count("renderTasks");
+            console.table(tasks);
+        }
+
+        // 13. UPDATE FILTER BUTTONS
+        function updateFilterButtons() {
+            filterButtons.forEach((button) => {
+                const selected = button.dataset.mode === currentFilter;
+                button.classList.toggle("active", selected);
+            });
+        }
+
+        // 14. FORM SUBMIT EVENT
+        function handleSubmit(event) {
+            event.preventDefault();
+            const success = addTask(taskInput.value);
+            if (!success) { return; }
+            taskInput.value = "";
+            taskInput.focus();
+        }
+
+        // 15. FILTER EVENTS
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                setFilter(button.dataset.mode);
+            });
+        });
+
+        // 16. SET FILTER
+        function setFilter(mode) {
+            currentFilter = mode;
+            renderTasks();
+        }
+
+        // 17. REGISTER FORM EVENT
+        taskForm.addEventListener("submit", handleSubmit);
+
+        // 18. INITIAL RENDER
+        renderTasks();
+        taskInput.focus();
+    </script>
 </body>
+
 </html>
