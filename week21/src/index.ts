@@ -1,9 +1,9 @@
-import {games} from './store.js'
+import { gameManager } from './store.js'
 setInterval(()=>{
-    games.push({
-        id:Math.random.toString(),
-        whitePlayerName:'Alice',
-        blackPlayerName:'rome',
-        moves:[]
+    gameManager.addGame({
+        id: Math.random().toString(),
+        whitePlayerName: 'Alice',
+        blackPlayerName: 'rome',
+        moves: []
     })
 },5000)
