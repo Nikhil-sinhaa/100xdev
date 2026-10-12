@@ -6,7 +6,7 @@ function middleware(req,res,next){
     const endTime = Date.now();
     console.log("Time taken",endTime-startTime);
 }
-app.use(middleware);
+app.use(middleware)
 app.get("/user", (req,res)=>{
     let user= {
         name:"Nikhil",
